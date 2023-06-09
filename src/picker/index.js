@@ -326,8 +326,8 @@ class ColorPlugin extends HTMLElement {
     }
 }
 
-if (!customElements.get('div')) {
-    customElements.define('div', ColorPlugin);
+if (!customElements.get('section')) {
+    customElements.define('section', ColorPlugin);
 }
 
 export {
