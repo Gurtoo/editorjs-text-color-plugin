@@ -257,8 +257,8 @@ class XyPopcon extends HTMLElement {
     }
 }
 
-if (!customElements.get('.color-section-popcon')) {
-    customElements.define('.color-section-popcon', XyPopcon);
+if (!customElements.get('popcon-block')) {
+    customElements.define('popcon-block', XyPopcon);
 }
 
 class XyPopover extends HTMLElement {
@@ -598,6 +598,6 @@ class XyPopover extends HTMLElement {
     }
 }
 
-if(!customElements.get('div')){
-    customElements.define('div', XyPopover);
+if(!customElements.get('popover-block')){
+    customElements.define('popover-block', XyPopover);
 }

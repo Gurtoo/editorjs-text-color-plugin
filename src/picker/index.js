@@ -155,15 +155,15 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <div id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
-                <button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</button>
-                <div id="popcon" class="color-section-popcon">
+            <popover-block id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+                <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</button-block>
+                <popcon-block id="popcon" class="color-section-popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
                         ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
-                </div>
-            </div>
+                </popcon-block>
+            </popover-block>
         </section>`;
     }
 
@@ -184,7 +184,6 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(this.shadowRoot, this.popover, this.popcon, 1)
 		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
@@ -318,7 +317,7 @@ class ColorPlugin extends HTMLElement {
                 this.colorBtn.removeAttribute('disabled');
             }
         }
-        if (name == 'dir' && this.popover) {
+        if (name === 'dir' && this.popover) {
             if (newValue != null) {
                 this.popover.dir = newValue;
             }

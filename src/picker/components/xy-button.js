@@ -330,8 +330,8 @@ export default class XyButton extends HTMLElement {
     }
 }
 
-if(!customElements.get('button')){
-    customElements.define('button', XyButton);
+if(!customElements.get('button-block')){
+    customElements.define('button-block', XyButton);
 }
 
 class XyButtonGroup extends HTMLElement {
