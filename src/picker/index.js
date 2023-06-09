@@ -1,4 +1,4 @@
-import './components/xy-popover.js';
+// import './components/div.js';
 import {
     handleCSSVariables,
     setDefaultColorCache,
@@ -39,7 +39,7 @@ class ColorPlugin extends HTMLElement {
             pointer-events:none;
         }
         
-        :host(:focus-within) xy-popover,:host(:hover) xy-popover{ 
+        :host(:focus-within) .color-section-popover,:host(:hover) .color-section-popover{ 
             z-index: 2;
         }
         input[type="color"]{
@@ -47,12 +47,12 @@ class ColorPlugin extends HTMLElement {
             outline: none;
             border: none;
         }
-        xy-popover{
+        .color-section-popover{
             width: 12px;
             height:35px;
             padding-right: 1px;
         }
-        xy-popover:hover {
+        .color-section-popover:hover {
             border-radius: 0 5px 5px 0;
             background: rgba(203, 203, 203, 0.49);
         }
@@ -72,10 +72,10 @@ class ColorPlugin extends HTMLElement {
             opacity: 1;
             z-index: auto;
         }
-        xy-popover{
+        .color-section-popover{
             display:block;
         }
-        xy-popcon{
+        .color-section-popcon{
             position: fixed;
             min-width:100%;
         }
@@ -93,7 +93,7 @@ class ColorPlugin extends HTMLElement {
             justify-content:flex-end;
             padding:0 .8em .8em;
         }
-        .pop-footer xy-button{
+        .pop-footer button{
             font-size: .8em;
             margin-left: .8em;
         }
@@ -153,15 +153,15 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
-                <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
-                <xy-popcon id="popcon">
+            <div id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+                <button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</button>
+                <div id="popcon" class="color-section-popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
                         ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
-                </xy-popcon>
-            </xy-popover>
+                </div>
+            </div>
         </section>`;
     }
 
@@ -182,6 +182,7 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
+		console.log(this.popover, this.shadowRoot, 1)
         this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();

@@ -330,8 +330,8 @@ export default class XyButton extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-button')){
-    customElements.define('xy-button', XyButton);
+if(!customElements.get('button')){
+    customElements.define('button', XyButton);
 }
 
 class XyButtonGroup extends HTMLElement {
@@ -344,23 +344,23 @@ class XyButtonGroup extends HTMLElement {
         :host {
             display:inline-flex;
         }
-        ::slotted(xy-button:not(:first-of-type):not(:last-of-type)){
+        ::slotted(button:not(:first-of-type):not(:last-of-type)){
             border-radius:0;
         }
-        ::slotted(xy-button){
+        ::slotted(button){
             margin:0!important;
         }
-        ::slotted(xy-button:not(:first-of-type)){
+        ::slotted(button:not(:first-of-type)){
             margin-left:-1px!important;
         }
-        ::slotted(xy-button[type]:not([type="dashed"]):not(:first-of-type)){
+        ::slotted(button[type]:not([type="dashed"]):not(:first-of-type)){
             margin-left:1px!important;
         }
-        ::slotted(xy-button:first-of-type){
+        ::slotted(button:first-of-type){
             border-top-right-radius: 0;
             border-bottom-right-radius: 0px;
         }
-        ::slotted(xy-button:last-of-type){
+        ::slotted(button:last-of-type){
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -391,6 +391,6 @@ class XyButtonGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('xy-button-group')){
-    customElements.define('xy-button-group', XyButtonGroup);
+if(!customElements.get('button-group')){
+    customElements.define('button-group', XyButtonGroup);
 }
