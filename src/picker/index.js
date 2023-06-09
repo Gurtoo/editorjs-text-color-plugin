@@ -155,15 +155,15 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <xy-popover id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
-                <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
-                <xy-popcon id="popcon" class="color-section-popcon">
+            <popover-block id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+                <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</button-block>
+                <popcon-block id="popcon" class="color-section-popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
                         ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
-                </xy-popcon>
-            </xy-popover>
+                </popcon-block>
+            </popover-block>
         </section>`;
     }
 
@@ -172,8 +172,8 @@ class ColorPlugin extends HTMLElement {
     }
 
     connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
         this.popcon = this.shadowRoot.getElementById('popcon');
+		this.popover = document.getElementById('popover');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
         this.colors.addEventListener('click',(ev) => {
@@ -184,6 +184,7 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
+		console.log(this.popcon, this.popover, 1)
 		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
@@ -325,8 +326,8 @@ class ColorPlugin extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-color-picker')) {
-    customElements.define('xy-color-picker', ColorPlugin);
+if (!customElements.get('custom-section')) {
+    customElements.define('custom-section', ColorPlugin);
 }
 
 export {
