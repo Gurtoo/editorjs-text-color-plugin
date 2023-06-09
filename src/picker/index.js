@@ -49,7 +49,7 @@ class ColorPlugin extends HTMLElement {
         }
         .color-section-popover{
             width: 12px;
-            height:35px;
+            height: 35px;
             padding-right: 1px;
         }
         .color-section-popover:hover {
@@ -77,7 +77,9 @@ class ColorPlugin extends HTMLElement {
         }
         .color-section-popcon{
             position: fixed;
-            min-width:100%;
+            min-width: 100%;
+            background-color: #ffffff;
+            transform: translate(0,10px) scale(1);
         }
         #custom-picker {
             position: relative;
@@ -170,7 +172,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     connectedCallback() {
-        this.popover = this.shadowRoot.getElementById('popover');
+        this.popover = this.shadowRoot.querySelector('.color-section-popover');
         this.popcon = this.shadowRoot.getElementById('popcon');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
@@ -182,8 +184,8 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(this.popover, this.shadowRoot, 1)
-        this.popover.addEventListener('click', () => this.closeConverter());
+		console.log(this.popover, this.shadowRoot, this.popcon, 1)
+		this.popover && this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
@@ -324,8 +326,8 @@ class ColorPlugin extends HTMLElement {
     }
 }
 
-if (!customElements.get('xy-color-picker')) {
-    customElements.define('xy-color-picker', ColorPlugin);
+if (!customElements.get('div')) {
+    customElements.define('div', ColorPlugin);
 }
 
 export {
