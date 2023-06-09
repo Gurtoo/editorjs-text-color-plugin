@@ -57,6 +57,8 @@ class ColorPlugin extends HTMLElement {
             background: rgba(203, 203, 203, 0.49);
         }
         .color-btn {
+        	display: flex;
+        	position: relative;
             border: 1px solid #cab9b9;
             margin: 18px 3px 2px 3px;
             width: 7px;
@@ -77,9 +79,10 @@ class ColorPlugin extends HTMLElement {
         }
         .color-section-popcon{
             position: fixed;
+            left: 0;
             min-width: 100%;
             background-color: #ffffff;
-            transform: translate(0,10px) scale(1);
+            transform: translate(0,20px) scale(1);
         }
         #custom-picker {
             position: relative;
@@ -155,8 +158,8 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <popover-block id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
-                <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</button-block>
+            <popover-block id="popover-block" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+                <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}></button-block>
                 <popcon-block id="popcon" class="color-section-popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
@@ -173,7 +176,7 @@ class ColorPlugin extends HTMLElement {
 
     connectedCallback() {
         this.popcon = this.shadowRoot.getElementById('popcon');
-		this.popover = document.getElementById('popover');
+		this.popover = this.shadowRoot.getElementById('popover-block');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
         this.colors.addEventListener('click',(ev) => {
@@ -184,7 +187,7 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(this.popcon, this.popover, 1)
+		console.log(this.popcon, this.popover, this.shadowRoot, 1)
 		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
