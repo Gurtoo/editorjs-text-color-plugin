@@ -172,8 +172,8 @@ class ColorPlugin extends HTMLElement {
     }
 
     connectedCallback() {
-        this.popover = this.shadowRoot.querySelector('.color-section-popover');
         this.popcon = this.shadowRoot.getElementById('popcon');
+		this.popover = this.shadowRoot.querySelector('.color-section-popover');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
         this.colors.addEventListener('click',(ev) => {
@@ -184,8 +184,8 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(this.popover, this.shadowRoot, this.popcon, 1)
-		this.popover && this.popover.addEventListener('click', () => this.closeConverter());
+		console.log(this.shadowRoot, this.popover, this.popcon, 1)
+		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
