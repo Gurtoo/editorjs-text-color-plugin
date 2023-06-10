@@ -1,30 +1,30 @@
-// import './components/div.js';
+import './components/xy-popover.js';
 import {
-    handleCSSVariables,
-    setDefaultColorCache,
-    getDefaultColorCache,
-    throttle,
-    getCustomColorCache,
-    setCustomColorCache,
-    CONVERTER_BTN,
-    CONVERTER_PANEL,
+	handleCSSVariables,
+	setDefaultColorCache,
+	getDefaultColorCache,
+	throttle,
+	getCustomColorCache,
+	setCustomColorCache,
+	CONVERTER_BTN,
+	CONVERTER_PANEL,
 } from './utils/main';
 const ColorCollections = ['#ff1300','#EC7878','#9C27B0','#673AB7','#3F51B5','#0070FF','#03A9F4','#00BCD4','#4CAF50','#8BC34A','#CDDC39','#FFE500','#FFBF00','#FF9800','#795548','#9E9E9E','#5A5A5A','#FFF'];
 class ColorPlugin extends HTMLElement {
 
-    static get observedAttributes() { return ['disabled','dir'] }
+	static get observedAttributes() { return ['disabled','dir'] }
 
-    constructor(options) {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        this.colorCollections = options.colorCollections || ColorCollections;
-        this.onColorPicked = options.onColorPicked;
-        this.defaulColor = handleCSSVariables(options.defaultColor || this.colorCollections[0]);
-        this.pluginType = options.type;
-        this.hasCustomPicker = options.hasCustomPicker;
-        this.customColor = getCustomColorCache(this.pluginType);
+	constructor(options) {
+		super();
+		const shadowRoot = this.attachShadow({ mode: 'open' });
+		this.colorCollections = options.colorCollections || ColorCollections;
+		this.onColorPicked = options.onColorPicked;
+		this.defaulColor = handleCSSVariables(options.defaultColor || this.colorCollections[0]);
+		this.pluginType = options.type;
+		this.hasCustomPicker = options.hasCustomPicker;
+		this.customColor = getCustomColorCache(this.pluginType);
 
-        shadowRoot.innerHTML = `
+		shadowRoot.innerHTML = `
         <style>
         :host{
             display:inline-block;
@@ -64,7 +64,7 @@ class ColorPlugin extends HTMLElement {
             width: 7px;
             height: 7px;
             opacity: 0.9;
-            /*padding: 1px 0 1px 0;*/
+            padding: 1px 0 1px 0;
             color: var(--themeColor, #42b983);
             background: var(--themeColor, #42b983);
             font-weight: bolder;
@@ -82,7 +82,7 @@ class ColorPlugin extends HTMLElement {
             left: 0;
             min-width: 100%;
             background-color: #ffffff;
-            transform: translate(0,20px) scale(1);
+            transform: translate(0,10px) scale(1);
         }
         #custom-picker {
             position: relative;
@@ -168,176 +168,175 @@ class ColorPlugin extends HTMLElement {
                 </popcon-block>
             </popover-block>
         </section>`;
-    }
+	}
 
-    focus() {
-        this.colorBtn.focus();
-    }
+	focus() {
+		this.colorBtn.focus();
+	}
 
-    connectedCallback() {
-        this.popcon = this.shadowRoot.getElementById('popcon');
-		this.popover = this.shadowRoot.getElementById('popover');
-        this.colorBtn = this.shadowRoot.getElementById('color-btn');
-        this.colors = this.shadowRoot.getElementById('colors');
-        this.colors.addEventListener('click',(ev) => {
-            const item = ev.target.closest('button');
-            if (item && item.id !== 'custom-picker') {
-                this.nativeclick = true;
-                this.value = handleCSSVariables(item.dataset.color);
-                this.onColorPicked(this.value);
-            }
-        });
+	connectedCallback() {
+		this.popcon = this.shadowRoot.getElementById('popcon');
+		this.popoverBlock = this.shadowRoot.getElementById('popover');
+		this.colorBtn = this.shadowRoot.getElementById('color-btn');
+		this.colors = this.shadowRoot.getElementById('colors');
+		this.colors.addEventListener('click',(ev) => {
+			const item = ev.target.closest('button');
+			if (item && item.id !== 'custom-picker') {
+				this.nativeclick = true;
+				this.value = handleCSSVariables(item.dataset.color);
+				this.onColorPicked(this.value);
+			}
+		});
 
-		this.shadowRoot.getElementById('popover').addEventListener('click', () => this.closeConverter());
+		this.popoverBlock.addEventListener('click', () => this.closeConverter());
 
-        if (this.hasCustomPicker) {
-            this.setupCustomPicker();
-        }
+		if (this.hasCustomPicker) {
+			this.setupCustomPicker();
+		}
 
-        this.value = this.defaultvalue;
-    }
+		this.value = this.defaultvalue;
+	}
 
-    closeConverter() {
-		console.log('asd')
-        const conversionOpened = document.getElementsByClassName(CONVERTER_PANEL)[0];
-        if (conversionOpened) {
-            const converterBtn = document.getElementsByClassName(CONVERTER_BTN)[0];
-            converterBtn?.click();
-        }
-    }
+	closeConverter() {
+		const conversionOpened = document.getElementsByClassName(CONVERTER_PANEL)[0];
+		if (conversionOpened) {
+			const converterBtn = document.getElementsByClassName(CONVERTER_BTN)[0];
+			converterBtn?.click();
+		}
+	}
 
-    disconnectedCallback() {
-        if (this.pickerInput) {
-            document.body.removeChild(this.pickerInput);
-        }
-    }
+	disconnectedCallback() {
+		if (this.pickerInput) {
+			document.body.removeChild(this.pickerInput);
+		}
+	}
 
-    setupCustomPicker() {
-        let isCustomPickerPseudoClick = false;
-        this.customPicker = this.shadowRoot.getElementById('custom-picker');
-        const customPicker = this.customPicker;
-        customPicker.style.backgroundColor = this.customColor;
-        this.customPicker.addEventListener('click', (ev) => {
-            if (isCustomPickerPseudoClick) {
-                isCustomPickerPseudoClick = false;
-                return;
-            }
-            if (this.pickerInput) {
-                document.body.removeChild(this.pickerInput);
-            }
-            this.pickerInput = document.createElement('input');
-            const pickerInput = this.pickerInput;
-            const rect = this.popcon.getBoundingClientRect();
-            pickerInput.setAttribute('type', 'color');
-            pickerInput.value = this.customColor;
-            pickerInput.style.position = 'fixed';
-            pickerInput.style.left = `${rect.x + 3}px`;
-            pickerInput.style.top = `${rect.y + 10}px`;
-            pickerInput.style.pointerEvents = 'none';
-            pickerInput.style.zIndex = '999';
-            pickerInput.style.opacity = '0';
-            pickerInput.addEventListener('input', throttle(ev => {
-                this.nativeclick = true;
-                this.value = handleCSSVariables(ev.target.value);
-                this.onColorPicked(this.value);
-                setCustomColorCache(this.value, this.pluginType);
+	setupCustomPicker() {
+		let isCustomPickerPseudoClick = false;
+		this.customPicker = this.shadowRoot.getElementById('custom-picker');
+		const customPicker = this.customPicker;
+		customPicker.style.backgroundColor = this.customColor;
+		this.customPicker.addEventListener('click', (ev) => {
+			if (isCustomPickerPseudoClick) {
+				isCustomPickerPseudoClick = false;
+				return;
+			}
+			if (this.pickerInput) {
+				document.body.removeChild(this.pickerInput);
+			}
+			this.pickerInput = document.createElement('input');
+			const pickerInput = this.pickerInput;
+			const rect = this.popcon.getBoundingClientRect();
+			pickerInput.setAttribute('type', 'color');
+			pickerInput.value = this.customColor;
+			pickerInput.style.position = 'fixed';
+			pickerInput.style.left = `${rect.x + 3}px`;
+			pickerInput.style.top = `${rect.y + 10}px`;
+			pickerInput.style.pointerEvents = 'none';
+			pickerInput.style.zIndex = '999';
+			pickerInput.style.opacity = '0';
+			pickerInput.addEventListener('input', throttle(ev => {
+				this.nativeclick = true;
+				this.value = handleCSSVariables(ev.target.value);
+				this.onColorPicked(this.value);
+				setCustomColorCache(this.value, this.pluginType);
 
-                customPicker.style.backgroundColor = this.value;
+				customPicker.style.backgroundColor = this.value;
 
-                isCustomPickerPseudoClick = true;
-                customPicker.click();
-            }, 30))
-            document.body.appendChild(pickerInput);
-            setTimeout(() => {
-                pickerInput.focus();
-                pickerInput.click();
-            }, 0);
-        });
-    }
+				isCustomPickerPseudoClick = true;
+				customPicker.click();
+			}, 30))
+			document.body.appendChild(pickerInput);
+			setTimeout(() => {
+				pickerInput.focus();
+				pickerInput.click();
+			}, 0);
+		});
+	}
 
-    get defaultvalue() {
-        return this.defaulColor;
-    }
+	get defaultvalue() {
+		return this.defaulColor;
+	}
 
-    get value() {
-        return this.$value;
-    }
+	get value() {
+		return this.$value;
+	}
 
-    get type() {
-        return this.getAttribute('type');
-    }
+	get type() {
+		return this.getAttribute('type');
+	}
 
-    get disabled() {
-        return this.getAttribute('disabled') !== null;
-    }
+	get disabled() {
+		return this.getAttribute('disabled') !== null;
+	}
 
-    get dir() {
-        return this.getAttribute('dir');
-    }
+	get dir() {
+		return this.getAttribute('dir');
+	}
 
-    set dir(value){
+	set dir(value){
 		console.log(value, 'set')
-        this.setAttribute('dir', value);
-    }
+		this.setAttribute('dir', value);
+	}
 
-    set disabled(value) {
-        if (value === null || value === false) {
-            this.removeAttribute('disabled');
-        } else {
-            this.setAttribute('disabled', '');
-        }
-    }
+	set disabled(value) {
+		if (value === null || value === false) {
+			this.removeAttribute('disabled');
+		} else {
+			this.setAttribute('disabled', '');
+		}
+	}
 
-    set defaultvalue(value){
-        this.setAttribute('defaultvalue', value);
-    }
+	set defaultvalue(value){
+		this.setAttribute('defaultvalue', value);
+	}
 
-    set value(value) {
-        if (!value) return;
-        this.$value = value;
-        this.colorBtn.style.setProperty(
-            '--themeColor',
-            this.nativeclick
-                ? setDefaultColorCache(value, this.pluginType)
-                : getDefaultColorCache(value, this.pluginType)
-        );
-        if (this.nativeclick) {
-            this.nativeclick = false;
-            this.dispatchEvent(new CustomEvent('change', {
-                detail: {
-                    value: this.value,
-                }
-            }));
-        } else {
-            if (this.colorPane) {
-                this.colorPane.value = this.value;
-            } else {
-                this.defaultvalue = this.value;
-            }
-        }
-    }
+	set value(value) {
+		if (!value) return;
+		this.$value = value;
+		this.colorBtn.style.setProperty(
+			'--themeColor',
+			this.nativeclick
+				? setDefaultColorCache(value, this.pluginType)
+				: getDefaultColorCache(value, this.pluginType)
+		);
+		if (this.nativeclick) {
+			this.nativeclick = false;
+			this.dispatchEvent(new CustomEvent('change', {
+				detail: {
+					value: this.value,
+				}
+			}));
+		} else {
+			if (this.colorPane) {
+				this.colorPane.value = this.value;
+			} else {
+				this.defaultvalue = this.value;
+			}
+		}
+	}
 
-    attributeChangedCallback(name, oldValue, newValue) {
+	attributeChangedCallback(name, oldValue, newValue) {
 		console.log(name, oldValue, newValue, 2)
-        if (name === 'disabled' && this.colorBtn) {
-            if (newValue != null) {
-                this.colorBtn.setAttribute('disabled', 'disabled');
-            } else {
-                this.colorBtn.removeAttribute('disabled');
-            }
-        }
-        if (name === 'dir' && this.popover) {
-            if (newValue != null) {
-                this.popover.dir = newValue;
-            }
-        }
-    }
+		if (name === 'disabled' && this.colorBtn) {
+			if (newValue != null) {
+				this.colorBtn.setAttribute('disabled', 'disabled');
+			} else {
+				this.colorBtn.removeAttribute('disabled');
+			}
+		}
+		if (name === 'dir' && this.popover) {
+			if (newValue != null) {
+				this.popover.dir = newValue;
+			}
+		}
+	}
 }
 
 if (!customElements.get('custom-section')) {
-    customElements.define('custom-section', ColorPlugin);
+	customElements.define('custom-section', ColorPlugin);
 }
 
 export {
-    ColorPlugin,
+	ColorPlugin,
 }
