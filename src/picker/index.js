@@ -193,7 +193,7 @@ class ColorPlugin extends HTMLElement {
 			this.shadowRoot.querySelector('.color-section-popover'),
 			this.shadowRoot.querySelector('popover-block'),
 			1)
-		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
+		if (this.shadowRoot.getElementById('popover') instanceof HTMLElement) this.shadowRoot.getElementById('popover').addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
