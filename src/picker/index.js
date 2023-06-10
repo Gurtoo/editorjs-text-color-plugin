@@ -64,7 +64,7 @@ class ColorPlugin extends HTMLElement {
             width: 7px;
             height: 7px;
             opacity: 0.9;
-            padding: 1px 0 1px 0;
+            /*padding: 1px 0 1px 0;*/
             color: var(--themeColor, #42b983);
             background: var(--themeColor, #42b983);
             font-weight: bolder;
