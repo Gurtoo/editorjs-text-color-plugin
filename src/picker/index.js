@@ -188,10 +188,7 @@ class ColorPlugin extends HTMLElement {
             }
         });
 
-		if (this.popover instanceof HTMLElement) {
-			console.log('asd')
-			this.popover.addEventListener('click', () => this.closeConverter());
-		}
+		this.shadowRoot.getElementById('popover').addEventListener('click', () => this.closeConverter());
 
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
@@ -201,6 +198,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     closeConverter() {
+		console.log('asd')
         const conversionOpened = document.getElementsByClassName(CONVERTER_PANEL)[0];
         if (conversionOpened) {
             const converterBtn = document.getElementsByClassName(CONVERTER_BTN)[0];
@@ -278,6 +276,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     set dir(value){
+		console.log(value, 'set')
         this.setAttribute('dir', value);
     }
 

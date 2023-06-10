@@ -227,29 +227,29 @@ class XyPopcon extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if (name == 'open' && this.shadowRoot) {
+        if (name === 'open' && this.shadowRoot) {
             if (newValue==null && !this.stopfocus) {
                 //window.xyActiveElement.focus();
             }
         }
-        if (name == 'loading' && this.shadowRoot) {
+        if (name === 'loading' && this.shadowRoot) {
             if (newValue!==null) {
                 this.btnSubmit.loading = true;
             } else {
                 this.btnSubmit.loading = false;
             }
         }
-        if (name == 'title' && this.titles) {
+        if (name === 'title' && this.titles) {
             if (newValue!==null) {
                 this.titles.innerHTML = newValue;
             }
         }
-        if (name == 'oktext' && this.btnSubmit) {
+        if (name === 'oktext' && this.btnSubmit) {
             if (newValue!==null) {
                 this.btnSubmit.innerHTML = newValue;
             }
         }
-        if (name == 'canceltext' && this.btnCancel) {
+        if (name === 'canceltext' && this.btnCancel) {
             if(newValue!==null){
                 this.btnCancel.innerHTML = newValue;
             }
