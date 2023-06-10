@@ -158,7 +158,7 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <popover-block id="popover-block" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+            <popover-block id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
                 <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}></button-block>
                 <popcon-block id="popcon" class="color-section-popcon">
                     <div class="color-sign" id="colors">
@@ -176,7 +176,7 @@ class ColorPlugin extends HTMLElement {
 
     connectedCallback() {
         this.popcon = this.shadowRoot.getElementById('popcon');
-		this.popover = this.shadowRoot.getElementById('popover-block');
+		this.popover = this.shadowRoot.getElementById('popover');
         this.colorBtn = this.shadowRoot.getElementById('color-btn');
         this.colors = this.shadowRoot.getElementById('colors');
         this.colors.addEventListener('click',(ev) => {
@@ -187,7 +187,12 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(this.popcon, this.popover, this.shadowRoot, 1)
+		console.log(
+			this.popover,
+			this.shadowRoot.getElementById('popover'),
+			this.shadowRoot.querySelector('.color-section-popover'),
+			this.shadowRoot.querySelector('popover-block'),
+			1)
 		if (this.popover instanceof HTMLElement) this.popover.addEventListener('click', () => this.closeConverter());
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
@@ -314,7 +319,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name == 'disabled' && this.colorBtn) {
+        if (name === 'disabled' && this.colorBtn) {
             if (newValue != null) {
                 this.colorBtn.setAttribute('disabled', 'disabled');
             } else {
