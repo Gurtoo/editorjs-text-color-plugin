@@ -26,20 +26,20 @@ class ColorPlugin extends HTMLElement {
 
         shadowRoot.innerHTML = `
         <style>
-        .color-section-popcon{
+        :host{
             display:inline-block;
             width:15px;
             font-size:14px;
             border: none;
         }
-        .color-section-popcon([block]){
+        :host([block]){
             display:block;
         }
-        .color-section-popcon([disabled]){
+        :host([disabled]){
             pointer-events:none;
         }
         
-        .color-section-popcon(:focus-within) .color-section-popover,.color-section-popcon(:hover) .color-section-popover{ 
+        :host(:focus-within) .color-section-popover,:host(:hover) .color-section-popover{ 
             z-index: 2;
         }
         input[type="color"]{
@@ -189,6 +189,7 @@ class ColorPlugin extends HTMLElement {
         });
 
 		if (this.popover instanceof HTMLElement) {
+			console.log('asd')
 			this.popover.addEventListener('click', () => this.closeConverter());
 		}
 
