@@ -26,20 +26,20 @@ class ColorPlugin extends HTMLElement {
 
         shadowRoot.innerHTML = `
         <style>
-        :host{
+        .color-section-popcon{
             display:inline-block;
             width:15px;
             font-size:14px;
             border: none;
         }
-        :host([block]){
+        .color-section-popcon([block]){
             display:block;
         }
-        :host([disabled]){
+        .color-section-popcon([disabled]){
             pointer-events:none;
         }
         
-        :host(:focus-within) .color-section-popover,:host(:hover) .color-section-popover{ 
+        .color-section-popcon(:focus-within) .color-section-popover,.color-section-popcon(:hover) .color-section-popover{ 
             z-index: 2;
         }
         input[type="color"]{
@@ -187,16 +187,15 @@ class ColorPlugin extends HTMLElement {
                 this.onColorPicked(this.value);
             }
         });
-		console.log(
-			this.popover,
-			this.shadowRoot.getElementById('popover'),
-			this.shadowRoot.querySelector('.color-section-popover'),
-			this.shadowRoot.querySelector('popover-block'),
-			1)
-		if (this.shadowRoot.getElementById('popover') instanceof HTMLElement) this.shadowRoot.getElementById('popover').addEventListener('click', () => this.closeConverter());
+
+		if (this.popover instanceof HTMLElement) {
+			this.popover.addEventListener('click', () => this.closeConverter());
+		}
+
         if (this.hasCustomPicker) {
             this.setupCustomPicker();
         }
+
         this.value = this.defaultvalue;
     }
 
@@ -319,6 +318,7 @@ class ColorPlugin extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
+		console.log(name, oldValue, newValue, 2)
         if (name === 'disabled' && this.colorBtn) {
             if (newValue != null) {
                 this.colorBtn.setAttribute('disabled', 'disabled');

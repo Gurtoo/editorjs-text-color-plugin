@@ -268,148 +268,148 @@ class XyPopover extends HTMLElement {
         const shadowRoot = this.attachShadow({ mode: 'open' });
         shadowRoot.innerHTML = `
         <style>
-        :host {
+        .color-section-popcon {
             display:inline-block;
             position:relative;
             overflow:visible;
         }
-        :host([dir="top"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="top"]) ::slotted(popcon-block){
             bottom:100%;
             left:50%;
             transform:translate(-50%,-10px) scale(0);
             transform-origin: center bottom;
         }
-        :host([dir="top"]) ::slotted(popcon-block[open]),
-        :host([dir="top"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="top"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="top"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="top"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="top"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(-50%,-10px) scale(1);
         }
-        :host([dir="right"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="right"]) ::slotted(popcon-block){
             left:100%;
             top:50%;
             transform:translate(10px,-50%) scale(0);
             transform-origin: left;
         }
-        :host([dir="right"]) ::slotted(popcon-block[open]),
-        :host([dir="right"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="right"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="right"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="right"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="right"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(10px,-50%) scale(1);
         }
-        :host([dir="bottom"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="bottom"]) ::slotted(popcon-block){
             top:100%;
             left:50%;
             transform:translate(-50%,10px) scale(0);
             transform-origin: center top;
         }
-        :host([dir="bottom"]) ::slotted(popcon-block[open]),
-        :host([dir="bottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="bottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="bottom"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="bottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="bottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(-50%,10px) scale(1);
         }
-        :host([dir="left"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="left"]) ::slotted(popcon-block){
             right:100%;
             top:50%;
             transform:translate(-10px,-50%) scale(0);
             transform-origin: right;
         }
-        :host([dir="left"]) ::slotted(popcon-block[open]),
-        :host([dir="left"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="left"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="left"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="left"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="left"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(-10px,-50%) scale(1);
         }
-        :host([dir="lefttop"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="lefttop"]) ::slotted(popcon-block){
             right:100%;
             top:0;
             transform:translate(-10px) scale(0);
             transform-origin: right top;
         }
-        :host([dir="lefttop"]) ::slotted(popcon-block[open]),
-        :host([dir="lefttop"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="lefttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="lefttop"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="lefttop"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="lefttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(-10px) scale(1);
         }
-        :host([dir="leftbottom"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="leftbottom"]) ::slotted(popcon-block){
             right:100%;
             bottom:0;
             transform:translate(-10px) scale(0);
             transform-origin: right bottom;
         }
-        :host([dir="leftbottom"]) ::slotted(popcon-block[open]),
-        :host([dir="leftbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="leftbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="leftbottom"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="leftbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="leftbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(-10px) scale(1);
         }
-        :host([dir="topleft"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="topleft"]) ::slotted(popcon-block){
             bottom:100%;
             left:0;
             transform:translate(0,-10px) scale(0);
             transform-origin: left bottom;
         }
-        :host([dir="topleft"]) ::slotted(popcon-block[open]),
-        :host([dir="topleft"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="topleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="topleft"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="topleft"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="topleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(0,-10px) scale(1);
         }
-        :host([dir="topright"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="topright"]) ::slotted(popcon-block){
             bottom:100%;
             right:0;
             transform:translate(0,-10px) scale(0);
             transform-origin: right bottom;
         }
-        :host([dir="topright"]) ::slotted(popcon-block[open]),
-        :host([dir="topright"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="topright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="topright"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="topright"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="topright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(0,-10px) scale(1);
         }
-        :host([dir="righttop"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="righttop"]) ::slotted(popcon-block){
             left:100%;
             top:0;
             transform:translate(10px) scale(0);
             transform-origin: left top;
         }
-        :host([dir="righttop"]) ::slotted(popcon-block[open]),
-        :host([dir="righttop"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="righttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="righttop"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="righttop"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="righttop"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(10px) scale(1);
         }
-        :host([dir="rightbottom"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="rightbottom"]) ::slotted(popcon-block){
             left:100%;
             bottom:0;
             transform:translate(10px) scale(0);
             transform-origin: left bottom;
         }
-        :host([dir="rightbottom"]) ::slotted(popcon-block[open]),
-        :host([dir="rightbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="rightbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="rightbottom"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="rightbottom"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="rightbottom"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(10px) scale(1);
         }
-        :host([dir="bottomleft"]) ::slotted(popcon-block),
-        :host(:not([dir])) ::slotted(popcon-block){
+        .color-section-popcon([dir="bottomleft"]) ::slotted(popcon-block),
+        .color-section-popcon(:not([dir])) ::slotted(popcon-block){
             left:0;
             top:100%;
             transform:translate(0,10px) scale(0);
             transform-origin: left top;
         }
-        :host(:not([dir])) ::slotted(popcon-block[open]),
-        :host(:not([dir])[trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host(:not([dir])[trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block),
-        :host([dir="bottomleft"]) ::slotted(popcon-block[open]),
-        :host([dir="bottomleft"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="bottomleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon(:not([dir])) ::slotted(popcon-block[open]),
+        .color-section-popcon(:not([dir])[trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon(:not([dir])[trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block),
+        .color-section-popcon([dir="bottomleft"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="bottomleft"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="bottomleft"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(0,10px) scale(1);
         }
-        :host([dir="bottomright"]) ::slotted(popcon-block){
+        .color-section-popcon([dir="bottomright"]) ::slotted(popcon-block){
             right:0;
             top:100%;
             transform:translate(0,10px) scale(0);
             transform-origin: right top;
         }
-        :host([dir="bottomright"]) ::slotted(popcon-block[open]),
-        :host([dir="bottomright"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([dir="bottomright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon([dir="bottomright"]) ::slotted(popcon-block[open]),
+        .color-section-popcon([dir="bottomright"][trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([dir="bottomright"][trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             transform:translate(0,10px) scale(1);
         }
-        :host([trigger="contextmenu"]) ::slotted(popcon-block){
+        .color-section-popcon([trigger="contextmenu"]) ::slotted(popcon-block){
             right:auto;
             bottom:auto;
             left:var(--x,0);
@@ -418,12 +418,12 @@ class XyPopover extends HTMLElement {
             transform:translate(5px,5px) scale(0);
             transition: .15s;
         }
-        :host([trigger="contextmenu"]) ::slotted(popcon-block[open]){
+        .color-section-popcon([trigger="contextmenu"]) ::slotted(popcon-block[open]){
             transform:translate(5px,5px) scale(1);
         }
-        :host ::slotted(popcon-block[open]),
-        :host([trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
-        :host([trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
+        .color-section-popcon ::slotted(popcon-block[open]),
+        .color-section-popcon([trigger="hover"]:not([disabled]):hover) ::slotted(popcon-block),
+        .color-section-popcon([trigger="focus"]:not([disabled]):focus-within) ::slotted(popcon-block){
             opacity:1;
             visibility:visible;
         }
@@ -573,24 +573,24 @@ class XyPopover extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if (name == 'loading' && this.popcon) {
+        if (name === 'loading' && this.popcon) {
             if(newValue!==null){
                 this.popcon.loading = true;
             }else{
                 this.popcon.loading = false;
             }
         }
-        if (name == 'title' && this.popcon) {
+        if (name === 'title' && this.popcon) {
             if(newValue!==null){
                 this.popcon.title = newValue;
             }
         }
-        if (name == 'oktext' && this.popcon) {
+        if (name === 'oktext' && this.popcon) {
             if(newValue!==null){
                 this.popcon.oktext = newValue;
             }
         }
-        if (name == 'canceltext' && this.popcon) {
+        if (name === 'canceltext' && this.popcon) {
             if(newValue!==null){
                 this.popcon.canceltext = newValue;
             }
