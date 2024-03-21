@@ -175,16 +175,16 @@ class XyPopcon extends HTMLElement {
             this.titles = this.shadowRoot.getElementById('title');
             this.btnClose = this.shadowRoot.getElementById('btn-close');
         }
-        if (this.type=='confirm') {
+        if (this.type==='confirm') {
             this.btnCancel = this.shadowRoot.getElementById('btn-cancel');
             this.btnSubmit = this.shadowRoot.getElementById('btn-submit');
         }
         this.addEventListener('transitionend',(ev)=>{
             if (ev.propertyName === 'transform' && this.open) {
-                if (this.type=='confirm') {
+                if (this.type==='confirm') {
                     this.btnSubmit.focus();
                 }
-                if (this.type=='pane') {
+                if (this.type==='pane') {
                     this.btnClose.focus();
                 }
                 this.dispatchEvent(new CustomEvent('open'));
@@ -210,7 +210,7 @@ class XyPopcon extends HTMLElement {
                 window.xyActiveElement.focus();
             })
         }
-        if (this.type=='confirm') {
+        if (this.type === 'confirm') {
             this.btnCancel.addEventListener('click',async ()=>{
                 this.dispatchEvent(new CustomEvent('cancel'));
                 this.open = false;

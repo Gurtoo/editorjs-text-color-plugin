@@ -84,10 +84,6 @@ class ColorPlugin extends HTMLElement {
             background-color: #ffffff;
             transform: translate(0,10px) scale(1);
         }
-        .colorPlugin.ce-inline-tool--active.color-section-popcon {
-		  opacity: 1;
-		  visibility: visible;
-		}
         #custom-picker {
             position: relative;
             top: -1px;
@@ -279,7 +275,6 @@ class ColorPlugin extends HTMLElement {
 	}
 
 	set dir(value){
-		console.log(value, 'set')
 		this.setAttribute('dir', value);
 	}
 
@@ -321,7 +316,6 @@ class ColorPlugin extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		console.log(name, oldValue, newValue, 2)
 		if (name === 'disabled' && this.colorBtn) {
 			if (newValue != null) {
 				this.colorBtn.setAttribute('disabled', 'disabled');
@@ -329,9 +323,9 @@ class ColorPlugin extends HTMLElement {
 				this.colorBtn.removeAttribute('disabled');
 			}
 		}
-		if (name === 'dir' && this.popover) {
+		if (name === 'dir' && this.popoverBlock) {
 			if (newValue != null) {
-				this.popover.dir = newValue;
+				this.popoverBlock.dir = newValue;
 			}
 		}
 	}
