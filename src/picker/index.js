@@ -78,7 +78,7 @@ class ColorPlugin extends HTMLElement {
             display:block;
         }
         .color-section-popcon{
-            position: fixed;
+            /*position: fixed;*/
             left: 0;
             min-width: 100%;
             background-color: #ffffff;

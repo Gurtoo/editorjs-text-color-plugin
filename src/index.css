@@ -23,6 +23,11 @@
   fill: #3c99ff;
 }
 
+.colorPlugin.ce-inline-tool--active .color-section-popcon {
+  opacity: 1;
+  visibility: visible;
+}
+
 #color-left-btn {
   height: 35px;
   width: 18px;
