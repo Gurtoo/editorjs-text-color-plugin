@@ -84,7 +84,7 @@ class ColorPlugin extends HTMLElement {
             background-color: #ffffff;
             transform: translate(0,10px) scale(1);
         }
-        .colorPlugin.ce-inline-tool--active .color-section-popcon {
+        .colorPlugin.ce-inline-tool--active.color-section-popcon {
 		  opacity: 1;
 		  visibility: visible;
 		}
