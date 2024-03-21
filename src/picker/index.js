@@ -79,7 +79,7 @@ class ColorPlugin extends HTMLElement {
         }
         .color-section-popcon{
             /*position: fixed;*/
-            left: 0;
+            /*left: 0;*/
             min-width: 100%;
             background-color: #ffffff;
             transform: translate(0,10px) scale(1);
