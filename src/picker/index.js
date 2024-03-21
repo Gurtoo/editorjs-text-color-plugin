@@ -39,7 +39,7 @@ class ColorPlugin extends HTMLElement {
             pointer-events:none;
         }
         
-        :host(:focus-within) .color-section-popover,:host(:hover) .color-section-popover{ 
+        :host(:focus-within) xy-popover,:host(:hover) xy-popover{ 
             z-index: 2;
         }
         input[type="color"]{
@@ -47,18 +47,16 @@ class ColorPlugin extends HTMLElement {
             outline: none;
             border: none;
         }
-        .color-section-popover{
+        xy-popover{
             width: 12px;
-            height: 35px;
+            height:35px;
             padding-right: 1px;
         }
-        .color-section-popover:hover {
+        xy-popover:hover {
             border-radius: 0 5px 5px 0;
             background: rgba(203, 203, 203, 0.49);
         }
         .color-btn {
-        	display: flex;
-        	position: relative;
             border: 1px solid #cab9b9;
             margin: 18px 3px 2px 3px;
             width: 7px;
@@ -74,15 +72,12 @@ class ColorPlugin extends HTMLElement {
             opacity: 1;
             z-index: auto;
         }
-        .color-section-popover{
+        xy-popover{
             display:block;
         }
-        .color-section-popcon{
-            /*position: fixed;*/
-            /*left: 0;*/
-            min-width: 100%;
-            background-color: #ffffff;
-            transform: translate(0,10px) scale(1);
+        xy-popcon{
+            position: fixed;
+            min-width:100%;
         }
         #custom-picker {
             position: relative;
@@ -98,7 +93,7 @@ class ColorPlugin extends HTMLElement {
             justify-content:flex-end;
             padding:0 .8em .8em;
         }
-        .pop-footer button{
+        .pop-footer xy-button{
             font-size: .8em;
             margin-left: .8em;
         }
@@ -158,15 +153,15 @@ class ColorPlugin extends HTMLElement {
         }
         </style>
         <section class="color-section">
-            <popover-block id="popover" class="color-section-popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
-                <button-block class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}></button-block>
-                <popcon-block id="popcon" class="color-section-popcon">
+            <xy-popover id="popover" ${this.dir ? "dir='" + this.dir + "'" : ""}>
+                <xy-button class="color-btn" id="color-btn" ${this.disabled ? "disabled" : ""}>_</xy-button>
+                <xy-popcon id="popcon">
                     <div class="color-sign" id="colors">
                         ${this.hasCustomPicker && (`<button id="custom-picker" class="rainbow-mask"/>`) || ''}
                         ${this.colorCollections.map(el => '<button class="color-cube" style="background-color:' + el + '" data-color=' + el + '></button>').join('')}
                     </div>
-                </popcon-block>
-            </popover-block>
+                </xy-popcon>
+            </xy-popover>
         </section>`;
 	}
 
@@ -175,8 +170,8 @@ class ColorPlugin extends HTMLElement {
 	}
 
 	connectedCallback() {
+		this.popover = this.shadowRoot.getElementById('popover');
 		this.popcon = this.shadowRoot.getElementById('popcon');
-		this.popoverBlock = this.shadowRoot.getElementById('popover');
 		this.colorBtn = this.shadowRoot.getElementById('color-btn');
 		this.colors = this.shadowRoot.getElementById('colors');
 		this.colors.addEventListener('click',(ev) => {
@@ -187,13 +182,10 @@ class ColorPlugin extends HTMLElement {
 				this.onColorPicked(this.value);
 			}
 		});
-
-		this.popoverBlock.addEventListener('click', () => this.closeConverter());
-
+		this.popover.addEventListener('click', () => this.closeConverter());
 		if (this.hasCustomPicker) {
 			this.setupCustomPicker();
 		}
-
 		this.value = this.defaultvalue;
 	}
 
@@ -275,7 +267,6 @@ class ColorPlugin extends HTMLElement {
 	}
 
 	set dir(value){
-		console.log(value, 'set')
 		this.setAttribute('dir', value);
 	}
 
@@ -317,15 +308,14 @@ class ColorPlugin extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		console.log(name, oldValue, newValue, 2)
-		if (name === 'disabled' && this.colorBtn) {
+		if (name == 'disabled' && this.colorBtn) {
 			if (newValue != null) {
 				this.colorBtn.setAttribute('disabled', 'disabled');
 			} else {
 				this.colorBtn.removeAttribute('disabled');
 			}
 		}
-		if (name === 'dir' && this.popover) {
+		if (name == 'dir' && this.popover) {
 			if (newValue != null) {
 				this.popover.dir = newValue;
 			}
@@ -333,8 +323,8 @@ class ColorPlugin extends HTMLElement {
 	}
 }
 
-if (!customElements.get('custom-section')) {
-	customElements.define('custom-section', ColorPlugin);
+if (!customElements.get('xy-color-picker')) {
+	customElements.define('xy-color-picker', ColorPlugin);
 }
 
 export {

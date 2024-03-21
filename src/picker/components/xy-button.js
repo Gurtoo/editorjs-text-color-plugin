@@ -294,7 +294,7 @@ export default class XyButton extends HTMLElement {
     }
 
     attributeChangedCallback (name, oldValue, newValue) {
-        if (name === 'disabled' && this.btn) {
+        if (name == 'disabled' && this.btn) {
             if (newValue !== null) {
                 this.btn.setAttribute('disabled', 'disabled');
                 if (this.href) {
@@ -307,7 +307,7 @@ export default class XyButton extends HTMLElement {
                 }
             }
         }
-        if (name === 'loading' && this.btn) {
+        if (name == 'loading' && this.btn) {
             if (newValue!==null) {
                 this.shadowRoot.prepend(this.load);
                 this.btn.setAttribute('disabled', 'disabled');
@@ -316,22 +316,22 @@ export default class XyButton extends HTMLElement {
                 this.btn.removeAttribute('disabled');
             }
         }
-        if (name === 'icon' && this.ico) {
+        if (name == 'icon' && this.ico) {
             this.ico.name = newValue;
         }
-        if (name === 'href' && this.btn) {
+        if (name == 'href' && this.btn) {
             if(!this.disabled){
                 this.btn.href = newValue;
             }
         }
-        if (name === 'htmltype' && this.btn) {
+        if (name == 'htmltype' && this.btn) {
             this.btn.type = newValue;
         }
     }
 }
 
-if(!customElements.get('button-block')){
-    customElements.define('button-block', XyButton);
+if(!customElements.get('xy-button')){
+    customElements.define('xy-button', XyButton);
 }
 
 class XyButtonGroup extends HTMLElement {
@@ -344,23 +344,23 @@ class XyButtonGroup extends HTMLElement {
         :host {
             display:inline-flex;
         }
-        ::slotted(button-block:not(:first-of-type):not(:last-of-type)){
+        ::slotted(xy-button:not(:first-of-type):not(:last-of-type)){
             border-radius:0;
         }
-        ::slotted(button-block){
+        ::slotted(xy-button){
             margin:0!important;
         }
-        ::slotted(button-block:not(:first-of-type)){
+        ::slotted(xy-button:not(:first-of-type)){
             margin-left:-1px!important;
         }
-        ::slotted(button-block[type]:not([type="dashed"]):not(:first-of-type)){
+        ::slotted(xy-button[type]:not([type="dashed"]):not(:first-of-type)){
             margin-left:1px!important;
         }
-        ::slotted(button-block:first-of-type){
+        ::slotted(xy-button:first-of-type){
             border-top-right-radius: 0;
             border-bottom-right-radius: 0px;
         }
-        ::slotted(button-block:last-of-type){
+        ::slotted(xy-button:last-of-type){
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
@@ -391,6 +391,6 @@ class XyButtonGroup extends HTMLElement {
     }
 }
 
-if(!customElements.get('button-group')){
-    customElements.define('button-group', XyButtonGroup);
+if(!customElements.get('xy-button-group')){
+    customElements.define('xy-button-group', XyButtonGroup);
 }
